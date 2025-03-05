@@ -75,7 +75,6 @@ public final class UriCompliance implements ComplianceViolation.Mode
          */
         USER_INFO("https://datatracker.ietf.org/doc/html/rfc9110#name-deprecation-of-userinfo-in-", "Deprecated User Info");
 
-
         private final String _url;
         private final String _description;
 
