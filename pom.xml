@@ -181,17 +181,14 @@
 
   <distributionManagement>
     <repository>
-      <id>oss.sonatype.org</id>
-      <name>Jetty Staging Repository</name>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+      <id>sonatype-cp</id>
+      <url>https://repo.maven.apache.org/maven2</url>
     </repository>
     <snapshotRepository>
-      <id>oss.sonatype.org</id>
-      <name>Jetty Snapshot Repository</name>
-      <url>https://oss.sonatype.org/content/repositories/jetty-snapshots/</url>
+      <id>sonatype-cp</id>
+      <url>https://central.sonatype.com/repository/maven-snapshots</url>
     </snapshotRepository>
   </distributionManagement>
-
   <properties>
     <alpn.agent.version>2.0.10</alpn.agent.version>
     <ant.version>1.10.15</ant.version>
@@ -324,6 +321,7 @@
     <!-- if changing this version please update default in MongoTestHelper you will get thanks from Eclipse IDE users -->
     <mongo.docker.version>3.2.20</mongo.docker.version>
     <mongodb.version>3.12.14</mongodb.version>
+    <njord.version>0.8.2</njord.version>
     <openpojo.version>0.9.1</openpojo.version>
     <org.osgi.annotation.version>8.1.0</org.osgi.annotation.version>
     <org.osgi.core.version>6.0.0</org.osgi.core.version>
@@ -1501,6 +1499,11 @@
           <version>${license.maven.plugin.version}</version>
         </plugin>
         <plugin>
+          <groupId>eu.maveniverse.maven.plugins</groupId>
+          <artifactId>njord</artifactId>
+          <version>${njord.version}</version>
+        </plugin>
+        <plugin>
           <groupId>org.apache.felix</groupId>
           <artifactId>maven-bundle-plugin</artifactId>
           <version>${maven.bundle.plugin.version}</version>
@@ -2132,6 +2135,14 @@
         </executions>
       </plugin>
     </plugins>
+
+    <extensions>
+      <extension>
+        <groupId>eu.maveniverse.maven.njord</groupId>
+        <artifactId>extension3</artifactId>
+        <version>${njord.version}</version>
+      </extension>
+    </extensions>
   </build>
 
   <profiles>
@@ -2510,33 +2521,6 @@
           </plugin>
         </plugins>
       </build>
-    </profile>
-    <profile>
-      <id>snapshot-repositories</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <repositories>
-        <repository>
-          <snapshots>
-            <enabled>true</enabled>
-          </snapshots>
-          <id>jetty-snapshots</id>
-          <name>jetty-snapshots</name>
-          <url>https://oss.sonatype.org/content/repositories/jetty-snapshots</url>
-        </repository>
-        <repository>
-          <releases>
-            <enabled>false</enabled>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-          </snapshots>
-          <id>oss.snapshots</id>
-          <name>OSS Snapshots</name>
-          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </repository>
-      </repositories>
     </profile>
     <profile>
       <id>fast</id>
