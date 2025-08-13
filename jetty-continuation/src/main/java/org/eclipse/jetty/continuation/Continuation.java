@@ -40,7 +40,7 @@ import javax.servlet.ServletResponseWrapper;
  * provided by the servlet-3.0 and an enhancement of the continuation
  * API that was introduced with jetty-6.
  * </p>
- * <h1>Continuation Usage</h1>
+ * <b>Continuation Usage</b>
  * <p>
  * A continuation object is obtained for a request by calling the
  * factory method {@link ContinuationSupport#getContinuation(ServletRequest)}.
@@ -50,7 +50,7 @@ import javax.servlet.ServletResponseWrapper;
  * <p>
  * There are two distinct style of operation of the continuation API.
  * </p>
- * <h1>Suspend/Resume Usage</h1>
+ * <b>Suspend/Resume Usage</b>
  * <p>The suspend/resume style is used when a servlet and/or
  * filter is used to generate the response after a asynchronous wait that is
  * terminated by an asynchronous handler.
@@ -85,7 +85,7 @@ import javax.servlet.ServletResponseWrapper;
  *     response.getOutputStream().write(process(results));
  *   }
  * </pre>
- * <h1>Suspend/Complete Usage</h1>
+ * <b>Suspend/Complete Usage</b>
  * <p>
  * The suspend/complete style is used when an asynchronous handler is used to
  * generate the response:
@@ -120,7 +120,7 @@ import javax.servlet.ServletResponseWrapper;
  *   continuation.complete()
  * </pre>
  *
- * <h1>Continuation Timeout</h1>
+ * <b>Continuation Timeout</b>
  * <p>
  * If a continuation is suspended, but neither {@link #complete()} or {@link #resume()} is
  * called during the period set by {@link #setTimeout(long)}, then the continuation will
