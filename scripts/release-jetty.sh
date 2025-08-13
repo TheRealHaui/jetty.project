@@ -69,7 +69,9 @@ VER_CURRENT=`sed -e "s/xmlns/ignore/" pom.xml | xmllint --xpath "/project/versio
 echo "Current pom.xml Version: ${VER_CURRENT}"
 read -e -p "Release Version  ? " VER_RELEASE
 read -e -p "Next Dev Version ? " VER_NEXT
+read -e -p "Previous Version ? " PREV_VER
 TAG_NAME="jetty-$VER_RELEASE"
+PREV_TAG="jetty-$PREV_VER"
 
 # Ensure tag doesn't exist (yet)
 git rev-parse --quiet --verify "$TAG_NAME" 2>&1 > /dev/null
@@ -92,7 +94,7 @@ DEPLOY_OPTS="-DskipTests -Dtest=None"
 
 # Uncomment for Java 1.7
 # export MAVEN_OPTS="-Xmx1g -XX:MaxPermSize=128m"
-export MAVEN_OPTS="-Xmx2g"
+export MAVEN_OPTS="-Xmx4g"
 
 echo ""
 echo "-----------------------------------------------"
@@ -105,6 +107,7 @@ echo "Current Version  : $VER_CURRENT"
 echo "Release Version  : $VER_RELEASE"
 echo "Next Dev Version : $VER_NEXT"
 echo "Tag name         : $TAG_NAME"
+echo "Previous Tag name: $PREV_TAG"
 echo "MAVEN_OPTS       : $MAVEN_OPTS"
 echo "Maven Deploy Opts: $DEPLOY_OPTS"
 
@@ -139,10 +142,12 @@ if proceedyn "Are you sure you want to release using above? (y/N)" n; then
         # PATH_ORIG=$PATH
         # JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home
         # PATH=$JAVA_HOME/bin:$PATH
-        mvn -N -Pupdate-version generate-resources
-        cp VERSION.txt VERSION.txt.backup
-        cat VERSION.txt.backup | sed -e "s/$VER_CURRENT/$VER_RELEASE/" > VERSION.txt
-        rm VERSION.txt.backup
+        mvn -N -Pupdate-version generate-resources -Dwebtide.release.tools.releaseVersion=$VER_RELEASE \
+            -Dwebtide.release.tools.tagVersionPrior=$PREV_TAG
+#        mvn -N -Pupdate-version generate-resources
+#        cp VERSION.txt VERSION.txt.backup
+#        cat VERSION.txt.backup | sed -e "s/$VER_CURRENT/$VER_RELEASE/" > VERSION.txt
+#        rm VERSION.txt.backup
         # JAVA_HOME=$JAVA_HOME_ORIG
         # PATH=$PATH_ORIG
         echo "VERIFY the following files (in a different console window) before continuing."

@@ -80,7 +80,7 @@
     <maven.resolver.version>1.9.22</maven.resolver.version>
     <maven.version>3.9.0</maven.version>
     <mongodb.version>2.14.3</mongodb.version>
-    <njord.version>0.8.2</njord.version>
+    <njord.version>0.8.3</njord.version>
     <osgi.annotation.version>8.1.0</osgi.annotation.version>
     <osgi.core.version>6.0.0</osgi.core.version>
     <osgi.util.function.version>1.2.0</osgi.util.function.version>
@@ -548,6 +548,15 @@
           <artifactId>njord</artifactId>
           <version>${njord.version}</version>
         </plugin>
+      <plugin>
+        <groupId>net.webtide.tools</groupId>
+        <artifactId>webtide-release-tools-plugin</artifactId>
+        <version>1.1</version>
+        <configuration>
+          <configFile>${project.basedir}/build/release-tools-config.json</configFile>
+          <gitCacheDir>${project.build.directory}/.gitCacheDir</gitCacheDir>
+        </configuration>
+      </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-antrun-plugin</artifactId>
@@ -1616,36 +1625,16 @@
       <build>
         <plugins>
           <plugin>
-            <groupId>org.eclipse.jetty.toolchain</groupId>
-            <artifactId>jetty-version-maven-plugin</artifactId>
+            <groupId>net.webtide.tools</groupId>
+            <artifactId>webtide-release-tools-plugin</artifactId>
             <executions>
               <execution>
                 <id>gen-versiontxt</id>
-                <phase>generate-resources</phase>
                 <goals>
                   <goal>update-version-text</goal>
                   <goal>tag</goal>
                 </goals>
-                <configuration>
-                  <refreshTags>true</refreshTags>
-                  <copyGenerated>true</copyGenerated>
-                  <attachArtifact>false</attachArtifact>
-                  <updateDate>true</updateDate>
-                  <versionTagHeader>Tag for release: jetty-${project.version}</versionTagHeader>
-                  <filenameExcludes>
-                    <filenameExclude>jetty-documentation/.*</filenameExclude>
-                    <filenameExclude>examples/.*</filenameExclude>
-                    <filenameExclude>aggregates/.*</filenameExclude>
-                    <filenameExclude>.*/test-.*</filenameExclude>
-                    <filenameExclude>.*/.*-test/.*</filenameExclude>
-                    <filenameExclude>.*/.*-tests/.*</filenameExclude>
-                    <filenameExclude>.*/src/test/.*</filenameExclude>
-                    <filenameExclude>\.git.*</filenameExclude>
-                    <filenameExclude>.*\.md$</filenameExclude>
-                    <filenameExclude>.*\.txt$</filenameExclude>
-                    <filenameExclude>Jenkinsfile</filenameExclude>
-                  </filenameExcludes>
-                </configuration>
+                <phase>generate-resources</phase>
               </execution>
             </executions>
           </plugin>
