@@ -168,17 +168,13 @@ if proceedyn "Are you sure you want to release using above? (y/N)" n; then
         mvn njord:publish -Ddrop=false $DEPLOY_OPTS
     fi
     if proceedyn "Update working directory for $VER_NEXT? (Y/n)" y; then
-        echo "Update VERSION.txt for $VER_NEXT"
-        cp VERSION.txt VERSION.txt.backup
-        echo "jetty-$VER_NEXT" > VERSION.txt
-        echo "" >> VERSION.txt
-        cat VERSION.txt.backup >> VERSION.txt
         echo "Update project.versions for $VER_NEXT"
         mvn org.codehaus.mojo:versions-maven-plugin:2.7:set \
             -Peclipse-release \
             -DoldVersion="$VER_RELEASE" \
             -DnewVersion="$VER_NEXT" \
-            -DprocessAllModules=true -e
+            -DgenerateBackupPoms=false \
+            -DprocessAllModules=true
         echo "Commit $VER_NEXT"
         if proceedyn "Commit updates in working directory for $VER_NEXT? (Y/n)" y; then
             git commit -a -m "Updating to version $VER_NEXT"
