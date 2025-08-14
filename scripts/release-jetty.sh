@@ -151,7 +151,8 @@ if proceedyn "Are you sure you want to release using above? (y/N)" n; then
             -Peclipse-release \
             -DoldVersion="$VER_CURRENT" \
             -DnewVersion="$VER_RELEASE" \
-            -DprocessAllModules=true -e
+            -DgenerateBackupPoms=false \
+            -DprocessAllModules=true
     fi
     if proceedyn "Commit $VER_RELEASE updates? (Y/n)" y; then
         git commit -a -m "Updating to version $VER_RELEASE"
