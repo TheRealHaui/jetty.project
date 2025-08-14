@@ -1,7 +1,7 @@
 {
   "github_repo_owner": "jetty",
   "github_repo_name": "jetty.project",
-  "branch": "jetty-9.4.x",
+  "branch": "jetty-10.0.x",
   "label_exclusions": [
     "test",
     "build",
@@ -20,6 +20,7 @@
     ".*\\.png$"
   ],
   "branch_regex_exclusions": [
-    ".*/jetty-9\\.3\\.x$"
+    ".*/jetty-9\\.3\\.x$",
+    ".*/jetty-9\\.4\\.x$"
   ]
 }
