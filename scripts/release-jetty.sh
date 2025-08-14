@@ -188,7 +188,17 @@ if proceedyn "Are you sure you want to release using above? (y/N)" n; then
         git push $GIT_REMOTE_ID $GIT_BRANCH_ID
         git push $GIT_REMOTE_ID $TAG_NAME
     fi
-    echo "you can now eventually deploy to staging repo using mvn njord:publish  -Ddrop=false -Dpublisher=deploy -DaltDeploymentRepository=jetty-staging::http://localhost:8081/repository/release-staging"
+
+    if proceedyn "Do you want to build changelog.md in target/changelog.md? (Y/n)" y; then
+        mvn -N net.webtide.tools:webtide-release-tools-plugin:gh-release \
+            -Dwebtide.release.tools.refVersionCurrent=$TAG_NAME \
+            -Dwebtide.release.tools.tagVersionPrior=$PREV_TAG -e
+    fi
+
+    # here we need to add something to publish to our staging repo
+    # mvn njord:publish -Ddrop=false -Dpublisher=deploy -DaltDeploymentRepository=jetty-staging::http://localhost:8081/repository/release-staging
+    # need an entry in settings.xml for id jetty-staging
+
 else
     echo "Not performing release"
 fi
