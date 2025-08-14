@@ -76,7 +76,7 @@ public class TestJettyOSGiBootWithJsp
         List<Option> res = new ArrayList<>();
         res.addAll(TestOSGiUtil.jspDependencies());
         //test webapp bundle
-        res.add(mavenBundle().groupId("org.eclipse.jetty").artifactId("test-jetty-webapp").classifier("webbundle").versionAsInProject());
+        res.add(mavenBundle().groupId("org.eclipse.jetty.tests").artifactId("test-jetty-webapp").classifier("webbundle").versionAsInProject());
 
         return res;
     }
