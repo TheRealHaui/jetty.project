@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.eclipse.jetty.tests</groupId>
     <artifactId>test-webapps-parent</artifactId>
-    <version>9.4.58.v20250814</version>
+    <version>9.4.58-SNAPSHOT</version>
   </parent>
   <artifactId>test-jetty-webapp</artifactId>
   <name>Test :: Jetty Test Webapp</name>
@@ -11,7 +11,8 @@
   <properties>
     <bundle-symbolic-name>${project.groupId}.tests.webapp</bundle-symbolic-name>
     <!-- must deploy: required for jetty-distribution -->
-    <maven.deploy.skip>false</maven.deploy.skip>
+    <!-- commented as validation is broken in Central deployment -->
+<!--    <maven.deploy.skip>false</maven.deploy.skip>-->
   </properties>
   <build>
     <plugins>
