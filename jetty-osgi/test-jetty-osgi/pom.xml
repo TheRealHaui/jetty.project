@@ -391,7 +391,7 @@
 
     <!-- Eclipse OSGi Deps -->
     <dependency>
-      <groupId>org.eclipse.jetty</groupId>
+      <groupId>org.eclipse.jetty.tests</groupId>
       <artifactId>test-jetty-webapp</artifactId>
       <version>${project.version}</version>
       <classifier>webbundle</classifier>
