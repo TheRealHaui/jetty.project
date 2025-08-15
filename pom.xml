@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.eclipse.jetty</groupId>
   <artifactId>jetty-project</artifactId>
-  <version>9.4.58-SNAPSHOT</version>
+  <version>9.4.59-SNAPSHOT</version>
   <name>Jetty :: Project</name>
   <description>The Eclipse Jetty Project</description>
   <packaging>pom</packaging>
@@ -80,7 +80,7 @@
     <maven.resolver.version>1.9.22</maven.resolver.version>
     <maven.version>3.9.0</maven.version>
     <mongodb.version>2.14.3</mongodb.version>
-    <njord.version>0.8.2</njord.version>
+    <njord.version>0.8.3</njord.version>
     <osgi.annotation.version>8.1.0</osgi.annotation.version>
     <osgi.core.version>6.0.0</osgi.core.version>
     <osgi.util.function.version>1.2.0</osgi.util.function.version>
@@ -121,7 +121,7 @@
     <maven.eclipse.plugin.version>2.10</maven.eclipse.plugin.version>
     <maven.enforcer.plugin.version>3.5.0</maven.enforcer.plugin.version>
     <maven.jar.plugin.version>3.4.1</maven.jar.plugin.version>
-    <maven.javadoc.plugin.version>3.3.1</maven.javadoc.plugin.version>
+    <maven.javadoc.plugin.version>3.11.2</maven.javadoc.plugin.version>
     <maven.jxr.plugin.version>3.6.0</maven.jxr.plugin.version>
     <maven.plugin.plugin.version>3.15.1</maven.plugin.plugin.version>
     <maven.release.plugin.version>3.1.1</maven.release.plugin.version>
@@ -248,7 +248,6 @@
                   <version>[1.8,)</version>
                   <message>[ERROR] OLD JDK [${java.version}] in use. Jetty ${project.version} requires JDK 1.8.0 or newer</message>
                 </requireJavaVersion>
-                <versionTxtRule implementation="org.eclipse.jetty.toolchain.enforcer.rules.VersionTxtRule" />
                 <versionOsgiRule implementation="org.eclipse.jetty.toolchain.enforcer.rules.RequireOsgiCompatibleVersionRule" />
                 <versionRedhatRule implementation="org.eclipse.jetty.toolchain.enforcer.rules.RequireRedhatCompatibleVersionRule" />
                 <versionDebianRule implementation="org.eclipse.jetty.toolchain.enforcer.rules.RequireDebianCompatibleVersionRule" />
@@ -548,6 +547,15 @@
           <artifactId>njord</artifactId>
           <version>${njord.version}</version>
         </plugin>
+      <plugin>
+        <groupId>net.webtide.tools</groupId>
+        <artifactId>webtide-release-tools-plugin</artifactId>
+        <version>1.1</version>
+        <configuration>
+          <configFile>${project.basedir}/build-resources/release-tools-config.json</configFile>
+          <gitCacheDir>${project.build.directory}/.gitCacheDir</gitCacheDir>
+        </configuration>
+      </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-antrun-plugin</artifactId>
@@ -673,8 +681,9 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
-          <version>${maven.jar.plugin.version}</version>
+          <version>${maven.javadoc.plugin.version}</version>
           <configuration>
+            <legacyMode>true</legacyMode>
             <source>8</source>
             <charset>UTF-8</charset>
             <docencoding>UTF-8</docencoding>
@@ -1359,8 +1368,6 @@
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-javadoc-plugin</artifactId>
               <configuration>
-                <additionalJOption>--no-module-directories</additionalJOption>
-                <additionalOptions>-html5</additionalOptions>
                 <excludePackageNames>com.*:org.slf4j*:org.mortbay*:*.jmh*:org.eclipse.jetty.embedded*:org.eclipse.jetty.example.asyncrest*:org.eclipse.jetty.test*</excludePackageNames>
               </configuration>
             </plugin>
@@ -1616,36 +1623,16 @@
       <build>
         <plugins>
           <plugin>
-            <groupId>org.eclipse.jetty.toolchain</groupId>
-            <artifactId>jetty-version-maven-plugin</artifactId>
+            <groupId>net.webtide.tools</groupId>
+            <artifactId>webtide-release-tools-plugin</artifactId>
             <executions>
               <execution>
                 <id>gen-versiontxt</id>
-                <phase>generate-resources</phase>
                 <goals>
                   <goal>update-version-text</goal>
                   <goal>tag</goal>
                 </goals>
-                <configuration>
-                  <refreshTags>true</refreshTags>
-                  <copyGenerated>true</copyGenerated>
-                  <attachArtifact>false</attachArtifact>
-                  <updateDate>true</updateDate>
-                  <versionTagHeader>Tag for release: jetty-${project.version}</versionTagHeader>
-                  <filenameExcludes>
-                    <filenameExclude>jetty-documentation/.*</filenameExclude>
-                    <filenameExclude>examples/.*</filenameExclude>
-                    <filenameExclude>aggregates/.*</filenameExclude>
-                    <filenameExclude>.*/test-.*</filenameExclude>
-                    <filenameExclude>.*/.*-test/.*</filenameExclude>
-                    <filenameExclude>.*/.*-tests/.*</filenameExclude>
-                    <filenameExclude>.*/src/test/.*</filenameExclude>
-                    <filenameExclude>\.git.*</filenameExclude>
-                    <filenameExclude>.*\.md$</filenameExclude>
-                    <filenameExclude>.*\.txt$</filenameExclude>
-                    <filenameExclude>Jenkinsfile</filenameExclude>
-                  </filenameExcludes>
-                </configuration>
+                <phase>generate-resources</phase>
               </execution>
             </executions>
           </plugin>

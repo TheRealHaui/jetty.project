@@ -2,7 +2,7 @@
   <parent>
     <groupId>org.eclipse.jetty</groupId>
     <artifactId>jetty-project</artifactId>
-    <version>9.4.58-SNAPSHOT</version>
+    <version>9.4.59-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>jetty-distribution</artifactId>
@@ -82,7 +82,7 @@
             <configuration>
               <artifactItems>
                 <artifactItem>
-                  <groupId>org.eclipse.jetty</groupId>
+                  <groupId>org.eclipse.jetty.tests</groupId>
                   <artifactId>test-jetty-webapp</artifactId>
                   <version>${project.version}</version>
                   <type>war</type>
@@ -122,7 +122,7 @@
                   <destFileName>test-spec.war</destFileName>
                 </artifactItem>
                 <artifactItem>
-                  <groupId>org.eclipse.jetty</groupId>
+                  <groupId>org.eclipse.jetty.tests</groupId>
                   <artifactId>test-proxy-webapp</artifactId>
                   <version>${project.version}</version>
                   <type>war</type>
@@ -154,7 +154,7 @@
             <configuration>
               <artifactItems>
                 <artifactItem>
-                  <groupId>org.eclipse.jetty</groupId>
+                  <groupId>org.eclipse.jetty.tests</groupId>
                   <artifactId>test-jetty-webapp</artifactId>
                   <version>${project.version}</version>
                   <classifier>config</classifier>
@@ -393,14 +393,14 @@
       <optional>true</optional>
     </dependency>
     <dependency>
-      <groupId>org.eclipse.jetty</groupId>
+      <groupId>org.eclipse.jetty.tests</groupId>
       <artifactId>test-jetty-webapp</artifactId>
       <type>war</type>
       <version>${project.version}</version>
       <optional>true</optional>
     </dependency>
     <dependency>
-      <groupId>org.eclipse.jetty</groupId>
+      <groupId>org.eclipse.jetty.tests</groupId>
       <artifactId>test-proxy-webapp</artifactId>
       <type>war</type>
       <version>${project.version}</version>

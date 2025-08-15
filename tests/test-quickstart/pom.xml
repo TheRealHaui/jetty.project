@@ -3,8 +3,7 @@
   <parent>
     <groupId>org.eclipse.jetty.tests</groupId>
     <artifactId>tests-parent</artifactId>
-    <version>9.4.58-SNAPSHOT</version>
-    <relativePath>../pom.xml</relativePath>
+    <version>9.4.59-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.eclipse.jetty</groupId>
@@ -72,7 +71,7 @@
       <type>war</type>
     </dependency>
     <dependency>
-      <groupId>org.eclipse.jetty</groupId>
+      <groupId>org.eclipse.jetty.tests</groupId>
       <artifactId>test-jetty-webapp</artifactId>
       <version>${project.version}</version>
       <type>war</type>
@@ -164,7 +163,7 @@
                   <destFileName>test-spec.war</destFileName>
                 </artifactItem>
                 <artifactItem>
-                  <groupId>org.eclipse.jetty</groupId>
+                  <groupId>org.eclipse.jetty.tests</groupId>
                   <artifactId>test-jetty-webapp</artifactId>
                   <version>${project.version}</version>
                   <type>war</type>

@@ -75,7 +75,7 @@ public class TestJettyOSGiBootHTTP2
         options.addAll(TestOSGiUtil.coreJettyDependencies());
         options.addAll(TestOSGiUtil.jspDependencies());
         //deploy a test webapp
-        options.add(mavenBundle().groupId("org.eclipse.jetty").artifactId("test-jetty-webapp").classifier("webbundle").versionAsInProject());
+        options.add(mavenBundle().groupId("org.eclipse.jetty.tests").artifactId("test-jetty-webapp").classifier("webbundle").versionAsInProject());
         options.add(mavenBundle().groupId("org.eclipse.jetty").artifactId("jetty-alpn-openjdk8-client").versionAsInProject().start());
         options.add(mavenBundle().groupId("org.eclipse.jetty").artifactId("jetty-alpn-client").versionAsInProject().start());
         options.add(mavenBundle().groupId("org.eclipse.jetty.http2").artifactId("http2-client").versionAsInProject().start());

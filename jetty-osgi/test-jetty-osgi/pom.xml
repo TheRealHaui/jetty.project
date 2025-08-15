@@ -2,8 +2,7 @@
   <parent>
     <groupId>org.eclipse.jetty.osgi</groupId>
     <artifactId>jetty-osgi-project</artifactId>
-    <version>9.4.58-SNAPSHOT</version>
-    <relativePath>../pom.xml</relativePath>
+    <version>9.4.59-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>test-jetty-osgi</artifactId>
@@ -391,7 +390,7 @@
 
     <!-- Eclipse OSGi Deps -->
     <dependency>
-      <groupId>org.eclipse.jetty</groupId>
+      <groupId>org.eclipse.jetty.tests</groupId>
       <artifactId>test-jetty-webapp</artifactId>
       <version>${project.version}</version>
       <classifier>webbundle</classifier>

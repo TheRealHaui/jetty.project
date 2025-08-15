@@ -33,7 +33,7 @@ import org.eclipse.jetty.util.log.Logger;
  * <p>
  * JAAS LoginModule to retrieve user information from
  * a database and authenticate the user.
- * <h1>Notes</h1>
+ * <b>Notes</b>
  * <p>This version uses plain old JDBC connections NOT
  * Datasources.
  */
